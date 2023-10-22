@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Page Title</title>
-</head>
-<body>
+<script>
+const { exec } = require('child_process');
 
-<h1>My First Heading</h1>
-<p>My first paragraph.</p>
+let cmd = 'docker run -it -p 7860:7860 --platform=linux/amd64 --gpus all registry.hf.space/ap123-illusiondiffusion:gpu-8e6c97d python app.py';
 
-<script src="app.js"></script>
-
-</body>
-</html>
+exec(cmd, (error, stdout, stderr) => {
+    if (error) {
+        console.log(`error: ${error.message}`);
+        return;
+    }
+    if (stderr) {
+        console.log(`stderr: ${stderr}`);
+        return;
+    }
+    console.log(`stdout: ${stdout}`);
+});
+</script>
